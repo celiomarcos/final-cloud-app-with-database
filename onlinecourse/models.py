@@ -108,9 +108,10 @@ class Enrollment(models.Model):
     # question grade/mark
 
 class Question(models.Model):
-    courses = models.ForeignKey(Course, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     text = models.TextField(default="question_text")
     grade = models.IntegerField(default=0)
+    # other methds
 
     # <HINT> A sample model method to calculate if learner get the score of the question
     def is_get_score(self, selected_ids):
