@@ -108,8 +108,11 @@ class Enrollment(models.Model):
     # question grade/mark
 
 class Question(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    text = models.TextField(default="question_text")
+    # Foreign key to lesson
+    course = models.ForeignKey(Lesson, on_delete=models.CASCADE)
+    # question text
+    text = models.CharField(default="question_text")
+    # question grade/mark
     grade = models.IntegerField(default=0)
     # other methds
 
@@ -133,6 +136,8 @@ class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     text = models.TextField(default="choice_text")
     is_correct = models.BooleanField(default=False)
+    def __str__(self):
+        return self.content + ('correct' if self.is_correct else 'incorrect')
 
 # <HINT> The submission model
 # One enrollment could have multiple submission
@@ -142,3 +147,4 @@ class Submission(models.Model):
     enrollment = models.ForeignKey(Enrollment, on_delete=models.CASCADE)
     choices = models.ManyToManyField(Choice)
 #    Other fields and methods you would like to design
+    date = models.DateField(default=now)
