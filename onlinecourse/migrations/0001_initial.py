@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
             name='Choice',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('text', models.TextField(default='choice_text')),
+                ('text', models.CharField(default='question text', max_length=550)),
                 ('is_correct', models.BooleanField(default=False)),
             ],
         ),
@@ -57,9 +57,10 @@ class Migration(migrations.Migration):
             name='Question',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('text', models.TextField(default='question_text')),
-                ('grade', models.IntegerField(default=0)),
-                ('courses', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='onlinecourse.course')),
+                ('title', models.CharField(default='question title', max_length=550)),
+                ('text', models.CharField(default='question text', max_length=550)),
+                ('grade', models.FloatField(default=5.0)),
+                ('course', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='onlinecourse.course')),
             ],
         ),
         migrations.CreateModel(
