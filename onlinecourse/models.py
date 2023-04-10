@@ -140,7 +140,7 @@ class Question(models.Model):
     # Other fields and methods you would like to design
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    text = models.TextField(default="choice_text")
+    choice_text = models.TextField(default="choice_text")
     is_correct = models.BooleanField(default=False)
     def __str__(self):
         return self.text + ('correct' if self.is_correct else 'incorrect')
